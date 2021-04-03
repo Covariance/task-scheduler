@@ -12,7 +12,7 @@ final class ExecutionController {
   private final DependencyTree dependencyTree;
   private final ForkJoinPool forkJoinPool;
   private CountDownLatch latch;
-  private RuntimeException exception = null;
+  private Exception exception = null;
 
   public ExecutionController(final Collection<? extends Task> tasks) {
     dependencyTree = DependencyTree.build(this, tasks);
@@ -49,7 +49,7 @@ final class ExecutionController {
     return forkedActions;
   }
 
-  public void fail(final Task task, final RuntimeException exception) {
+  public void fail(final Task task, final Exception exception) {
     submitter.lock();
     this.exception = exception;
     while (latch.getCount() != 0) {

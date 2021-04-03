@@ -5,7 +5,7 @@ public final class TaskExecutionException extends RuntimeException {
     super("Task execution exception: " + message);
   }
 
-  public TaskExecutionException(final String message, final RuntimeException cause) {
+  public TaskExecutionException(final String message, final Exception cause) {
     super("Task execution exception: " + message, cause);
   }
 }

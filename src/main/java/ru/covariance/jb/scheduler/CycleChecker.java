@@ -42,12 +42,11 @@ final class CycleChecker<T> {
 
   private boolean dfs(T from) {
     switch (Objects.requireNonNull(state.put(from, VertexState.ENTERED))) {
-      case LEFT -> {
+      case LEFT:
         return false;
-      }
-      case ENTERED -> {
+      case ENTERED:
         return true;
-      }
+      default:
     }
 
     for (T next : graph.get(from)) {

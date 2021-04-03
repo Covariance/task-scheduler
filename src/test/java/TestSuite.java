@@ -136,4 +136,22 @@ public class TestSuite {
     Assertions.assertDoesNotThrow(() -> executor.execute(tasks));
     Assertions.assertEquals(100, counter.get());
   }
+
+  @Test
+  @Timeout(value = 10)
+  public void exceptionalTask() {
+    List<BasicTask> tasks = List.of(new BasicTask(
+        () -> { throw new RuntimeException("I'm exceptional"); },
+        List.of())
+    );
+    boolean excepted = false;
+
+    try {
+      executor.execute(tasks);
+    } catch (TaskExecutionException e) {
+      excepted = true;
+    }
+
+    Assertions.assertTrue(excepted);
+  }
 }

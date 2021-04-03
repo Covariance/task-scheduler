@@ -17,7 +17,7 @@ final class RunnableTask extends RecursiveAction {
   protected void compute() {
     try {
       task.execute();
-    } catch (RuntimeException e) {
+    } catch (Exception e) {
       controller.fail(task, e);
     }
     ForkJoinTask.invokeAll(controller.success(task));
